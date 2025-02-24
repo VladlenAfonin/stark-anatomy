@@ -1,6 +1,19 @@
 from algebra import *
 
 class Polynomial:
+    def __repr__(self):
+        coefficients_length = len(self.coefficients)
+
+        if coefficients_length == 0:
+            return '(empty univariate polynomial)'
+
+        acc = ''
+        for i, c in enumerate(self.coefficients[:-1]):
+            acc += f'{c}x^{i} '
+        acc += f'{self.coefficients[-1]}x^{coefficients_length - 1}'
+
+        return acc
+
     def __init__( self, coefficients ):
         self.coefficients = [c for c in coefficients]
 

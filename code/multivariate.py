@@ -1,6 +1,36 @@
+import typing
 from univariate import *
 
 class MPolynomial:
+    def __repr__(self):
+        if len(self.dictionary) == 0:
+            return '(empty multivariate polynomial)'
+
+        items = list(self.dictionary.items())
+
+        acc = ''
+        for powers, coefficient in items[:-1]:
+            monomial = ''
+            for i, power in enumerate(powers):
+                if power == 0:
+                    continue
+
+                monomial += f'x{i}^{power} '
+
+            acc += f'{coefficient} {monomial}+ '
+
+        powers, coefficient = items[-1]
+        monomial = ''
+        for i, power in enumerate(powers):
+            if power == 0:
+                continue
+
+            monomial += f'x{i}^{power} '
+
+        acc += f'{coefficient} {monomial}'
+
+        return acc
+
     def __init__( self, dictionary ):
         # Multivariate polynomials are represented as dictionaries with exponent vectors
         # as keys and coefficients as values. E.g.:
@@ -11,7 +41,7 @@ class MPolynomial:
         #     (0,0,1) => 42,
         #     (6,3,12) => -19,
         # }
-        self.dictionary = dictionary
+        self.dictionary: typing.Dict[typing.Tuple[int, ...], int] = dictionary
 
     def zero():
         return MPolynomial(dict())

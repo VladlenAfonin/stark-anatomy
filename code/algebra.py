@@ -12,6 +12,9 @@ def xgcd( x, y ):
     return old_s, old_t, old_r # a, b, g
 
 class FieldElement:
+    def __repr__(self):
+        return str(self.value)
+
     def __init__( self, value, field ):
         self.value = value
         self.field = field
@@ -63,6 +66,9 @@ class FieldElement:
             return False
 
 class Field:
+    def __repr__(self):
+        return f'GF({self.p})'
+
     def __init__( self, p ):
         self.p = p
 
